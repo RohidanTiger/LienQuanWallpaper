@@ -112,11 +112,9 @@ public class Utils {
     }
 
     public void setAsWallpaper(Bitmap bitmap) {
-
         try {
             WallpaperManager wm = WallpaperManager.getInstance(_context);
-            wm.setWallpaperOffsetSteps(1, 1);
-            wm.suggestDesiredDimensions(getScreenWidth(),getScreenHeigh());
+
             wm.setBitmap(bitmap);
             Toast.makeText(_context,
                     _context.getString(R.string.toast_wallpaper_set),

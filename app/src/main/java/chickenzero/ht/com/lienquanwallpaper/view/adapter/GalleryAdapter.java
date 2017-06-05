@@ -10,12 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import java.util.List;
 
 import chickenzero.ht.com.lienquanwallpaper.R;
+import chickenzero.ht.com.lienquanwallpaper.models.Wallpaper;
+import chickenzero.ht.com.lienquanwallpaper.utils.PicassoLoader;
 
 /**
  * Created by QuyDV on 6/3/17.
@@ -23,8 +22,9 @@ import chickenzero.ht.com.lienquanwallpaper.R;
 
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
-    private List<String> images;
+    private List<Wallpaper> images;
     private Context mContext;
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView thumbnail;
@@ -35,12 +35,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
         }
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<Wallpaper> images) {
         this.images = images;
         notifyDataSetChanged();
     }
 
-    public GalleryAdapter(Context context, List<String> images) {
+    public GalleryAdapter(Context context, List<Wallpaper> images) {
         mContext = context;
         this.images = images;
     }
@@ -55,13 +55,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        String image = images.get(position);
-
-        Glide.with(mContext).load(image)
-                .thumbnail(0.5f)
-                .crossFade()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.thumbnail);
+        Wallpaper image = images.get(position);
+        PicassoLoader.getInstance(mContext).with(mContext).load(image.getThumbnail()).into(holder.thumbnail);
     }
 
     @Override
