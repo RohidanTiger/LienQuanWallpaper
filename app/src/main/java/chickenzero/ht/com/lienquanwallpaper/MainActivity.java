@@ -13,34 +13,48 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import chickenzero.ht.com.lienquanwallpaper.customize.SpacesItemDecoration;
 import chickenzero.ht.com.lienquanwallpaper.models.Wallpaper;
 import chickenzero.ht.com.lienquanwallpaper.service.ListWallpaperRequest;
 import chickenzero.ht.com.lienquanwallpaper.service.ServiceGenerator;
+import chickenzero.ht.com.lienquanwallpaper.utils.ConnectivityReceiver;
 import chickenzero.ht.com.lienquanwallpaper.view.adapter.GalleryAdapter;
 import chickenzero.ht.com.lienquanwallpaper.view.fragments.SlideshowDialogFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String endpoint = "https://raw.githubusercontent.com/RohidanTiger/LienQuanLeague/master/wallpaper";
+public class MainActivity extends AppCompatActivity implements ConnectivityReceiver.ConnectivityReceiverListener{
     private ArrayList<Wallpaper> images;
     private ProgressDialog pDialog;
     private GalleryAdapter mAdapter;
     private RecyclerView recyclerView;
+    public AdRequest adRequest;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mAdView = (AdView)findViewById(R.id.adView);
         setSupportActionBar(toolbar);
         images = new ArrayList<>();
+        // init ad
+        MobileAds.initialize(getApplicationContext(), getResources().getString(R.string.unit_ad_unit_id));
+        adRequest = new AdRequest.Builder().addTestDevice("867826023574924").build();
+        mAdView.loadAd(adRequest);
+
         mAdapter = new GalleryAdapter(getApplicationContext(), images);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 
@@ -56,8 +70,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(itemDecoration);
         recyclerView.setAdapter(mAdapter);
 
-        showLoading(R.string.lbl_btn_save);
+        showLoading(R.string.cmn_loading);
         getListWallpaper();
+
+        ConnectivityReceiver.connectivityReceiverListener = this;
 
         recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getApplicationContext(), recyclerView, new GalleryAdapter.ClickListener() {
             @Override
@@ -84,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<Wallpaper>> call, Response<List<Wallpaper>> response) {
                 hideLoading();
                 images = (ArrayList<Wallpaper>) response.body();
-                mAdapter.setImages(response.body());
+                Collections.shuffle(images);
+                mAdapter.setImages(images);
             }
 
             @Override
@@ -159,5 +176,27 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onNetworkConnectionChanged(boolean isConnected) {
+        if(isConnected){
+            getListWallpaper();
+        }else{
+            Toast.makeText(this,getString(R.string.cmn_no_internet_access),Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        if(!ConnectivityReceiver.isConnected()){
+//            Toast.makeText(this,getResources().getString(R.string.cmn_no_internet_access),Toast.LENGTH_LONG).show();
+//        }
     }
 }

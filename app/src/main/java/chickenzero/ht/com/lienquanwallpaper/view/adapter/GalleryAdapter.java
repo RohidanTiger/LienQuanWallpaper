@@ -56,7 +56,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Wallpaper image = images.get(position);
-        PicassoLoader.getInstance(mContext).with(mContext).load(image.getThumbnail()).into(holder.thumbnail);
+        PicassoLoader.getInstance(mContext).with(mContext).load(image.getThumbnail()).placeholder(R.drawable.placeholder).into(holder.thumbnail);
     }
 
     @Override

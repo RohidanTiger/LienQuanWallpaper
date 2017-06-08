@@ -7,11 +7,17 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.github.chrisbanes.photoview.PhotoView;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 
+import chickenzero.ht.com.lienquanwallpaper.MainActivity;
 import chickenzero.ht.com.lienquanwallpaper.R;
 import chickenzero.ht.com.lienquanwallpaper.customize.ZoomableImageView;
 import chickenzero.ht.com.lienquanwallpaper.models.Wallpaper;
@@ -27,7 +33,10 @@ public class SlideshowDialogFragment extends DialogFragment {
     private Wallpaper image;
     private LinearLayout llSetWallpaper;
     private Utils utils;
-    private ImageView imageview;
+    private PhotoView imageview;
+    public MainActivity context;
+    private AdView mAdView;
+
 
     public static SlideshowDialogFragment newInstance() {
         SlideshowDialogFragment f = new SlideshowDialogFragment();
@@ -38,7 +47,8 @@ public class SlideshowDialogFragment extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_image_slider, container, false);
-        imageview = (ImageView) v.findViewById(R.id.image);
+        imageview = (PhotoView) v.findViewById(R.id.image);
+        mAdView = (AdView) v.findViewById(R.id.adView);
         utils = new Utils(getActivity());
 
         llSetWallpaper = (LinearLayout) v.findViewById(R.id.llSetWallpaper);
@@ -53,12 +63,14 @@ public class SlideshowDialogFragment extends DialogFragment {
                 utils.setAsWallpaper(bitmap);
             }
         });
+        mAdView.loadAd(context.adRequest);
         return v;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = (MainActivity) getActivity();
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar);
     }
 }

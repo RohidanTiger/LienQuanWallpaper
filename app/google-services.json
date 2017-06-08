@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "433514521796",
+    "firebase_url": "https://wallpaper-29689.firebaseio.com",
+    "project_id": "wallpaper-29689",
+    "storage_bucket": "wallpaper-29689.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433514521796:android:d2451ab17c9708b6",
+        "android_client_info": {
+          "package_name": "chickenzero.ht.com.lienquanwallpaper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "433514521796-odqbhro2m69iffcqgthfs0c7nql21h4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqOO5T3H2Ir1rymLxkO579iwHgN5mVw18"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

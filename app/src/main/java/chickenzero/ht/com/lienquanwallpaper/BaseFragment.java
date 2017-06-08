@@ -13,8 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by QuyDV on 3/29/17.
@@ -24,7 +22,6 @@ public abstract class BaseFragment extends Fragment {
     public MainActivity context;
     public String TAG = null;
     protected View rootView;
-    protected Unbinder mUnbinder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +33,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(getViewContent(), container, false);
-        mUnbinder = ButterKnife.bind(this, rootView);
         initUI();
         return rootView;
     }
