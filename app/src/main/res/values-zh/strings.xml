@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Liên Quân Wallpaper</string>
+    <string name="app_name">傳說對決 Wallpaper</string>
     <string name="action_settings">Cài đặt</string>
     <string name="nav_drawer_recently_added">Recently Added</string>
     <string name="toast_saved">Wallpapaer saved to #</string>
@@ -18,9 +18,9 @@
     <string name="lbl_no_grid_columns">Number of grid columns</string>
     <string name="lbl_gallery_name">Gallery directory name</string>
     <string name="lbl_btn_save">Save</string>
-    <string name="cmn_loading">Đang tải dữ liệu</string>
+    <string name="cmn_loading">Loading</string>
     <string name="unit_ad_unit_id">ca-app-pub-2910568088893309~8466305676</string>
     <string name="banner_ad_unit_id">ca-app-pub-2910568088893309/3756904476</string>
     <string name="interstitial_unit_id">ca-app-pub-2910568088893309/9036225279</string>
-    <string name="cmn_no_internet_access">Không có kết nối internet.</string>
+    <string name="cmn_no_internet_access">No internet access.</string>
 </resources>

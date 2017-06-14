@@ -1,7 +1,6 @@
 package chickenzero.ht.com.lienquanwallpaper.view.adapter;
 
 import android.content.Context;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
 import java.util.List;
 
 import chickenzero.ht.com.lienquanwallpaper.R;

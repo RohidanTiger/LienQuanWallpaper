@@ -195,8 +195,8 @@ public class MainActivity extends AppCompatActivity implements ConnectivityRecei
     @Override
     protected void onResume() {
         super.onResume();
-//        if(!ConnectivityReceiver.isConnected()){
-//            Toast.makeText(this,getResources().getString(R.string.cmn_no_internet_access),Toast.LENGTH_LONG).show();
-//        }
+        if(!ConnectivityReceiver.isConnected()){
+            Toast.makeText(this,getResources().getString(R.string.cmn_no_internet_access),Toast.LENGTH_LONG).show();
+        }
     }
 }
